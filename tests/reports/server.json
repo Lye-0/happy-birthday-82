@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "mime": "text/html; charset=utf-8",
+    "bytes": 7746,
+    "pass": true
+  },
+  {
+    "path": "/css/style.css",
+    "status": 200,
+    "mime": "text/css; charset=utf-8",
+    "bytes": 16087,
+    "pass": true
+  },
+  {
+    "path": "/src/core.js",
+    "status": 200,
+    "mime": "text/javascript; charset=utf-8",
+    "bytes": 3579,
+    "pass": true
+  },
+  {
+    "path": "/src/renderer.js",
+    "status": 200,
+    "mime": "text/javascript; charset=utf-8",
+    "bytes": 22063,
+    "pass": true
+  },
+  {
+    "path": "/src/app.js",
+    "status": 200,
+    "mime": "text/javascript; charset=utf-8",
+    "bytes": 13765,
+    "pass": true
+  },
+  {
+    "path": "/missing-file",
+    "status": 404,
+    "pass": true
+  }
+]

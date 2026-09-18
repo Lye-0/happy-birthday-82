@@ -1,0 +1,8 @@
+{
+  "name": "82-wishes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Exactly 82 candles. A warm, interactive 3D birthday cake.",
+  "scripts": { "start": "node scripts/serve.mjs", "test": "node --test tests/*.test.cjs", "preview:build": "node scripts/build-preview.mjs" },
+  "engines": { "node": ">=18" }
+}

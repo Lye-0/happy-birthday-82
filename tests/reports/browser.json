@@ -1,0 +1,332 @@
+{
+  "chromium": "144.0.7559.96",
+  "method": "Exact generated source loaded by Playwright set_content. Virtual X / SwiftShader WebGL2. HTTP and file navigation blocked by environment policy; not browser-tested via navigation.",
+  "checks": [
+    {
+      "test": "82 model / wick / flame / unique instances",
+      "pass": true,
+      "detail": {
+        "candles": 82,
+        "wicks": 82,
+        "flames": 82,
+        "rings": [
+          30,
+          24,
+          18,
+          10
+        ],
+        "strawberries": 12,
+        "blueberries": 36,
+        "renderedCandleInstances": 82,
+        "renderedWickInstances": 82,
+        "flameOrigins": 82,
+        "uniqueCandleIds": 82,
+        "litCount": 82,
+        "state": "lit",
+        "quality": "standard",
+        "paused": false,
+        "sound": false,
+        "hdr": true,
+        "triangles": 1504834,
+        "drawCalls": 55,
+        "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      }
+    },
+    {
+      "test": "Initial lit and sound off",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Progressive extinguishing",
+      "pass": true,
+      "detail": 53
+    },
+    {
+      "test": "Blow button blocked while blowing",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "All flames extinguished and replay enabled",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Replay relights exactly 82",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Count audit and overhead view",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "View reset and audit close",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "left mouse drag",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "middle mouse drag",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "right mouse drag",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Wheel zoom",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Camera stays above floor",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Animation pause state",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Quality low",
+      "pass": true,
+      "detail": {
+        "glError": 0
+      }
+    },
+    {
+      "test": "Quality high",
+      "pass": true,
+      "detail": {
+        "glError": 0
+      }
+    },
+    {
+      "test": "Quality standard",
+      "pass": true,
+      "detail": {
+        "glError": 0
+      }
+    },
+    {
+      "test": "Auto rotation changes view",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Settings Escape close",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Space blows out 82",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "R relights 82",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "V overhead shortcut",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Sound opt-in",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Sound toggles off",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Mobile controls within viewport (390, 844)",
+      "pass": true,
+      "detail": [
+        {
+          "id": "blow",
+          "x": 29,
+          "y": 673,
+          "w": 332,
+          "h": 59
+        },
+        {
+          "id": "settings-button",
+          "x": 332,
+          "y": 27,
+          "w": 34,
+          "h": 34
+        },
+        {
+          "id": "sound",
+          "x": 292,
+          "y": 27,
+          "w": 34,
+          "h": 34
+        },
+        {
+          "id": "view-top",
+          "x": 240.0625,
+          "y": 785,
+          "w": 40.734375,
+          "h": 24
+        },
+        {
+          "id": "view-reset",
+          "x": 303.796875,
+          "y": 785,
+          "w": 57.203125,
+          "h": 24
+        }
+      ]
+    },
+    {
+      "test": "Single-finger rotation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Pinch zoom",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Mobile count audit",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Mobile tap extinguishes all (390, 844)",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Mobile controls within viewport (360, 640)",
+      "pass": true,
+      "detail": [
+        {
+          "id": "blow",
+          "x": 25,
+          "y": 493,
+          "w": 310,
+          "h": 51
+        },
+        {
+          "id": "settings-button",
+          "x": 302,
+          "y": 23,
+          "w": 34,
+          "h": 34
+        },
+        {
+          "id": "sound",
+          "x": 262,
+          "y": 23,
+          "w": 34,
+          "h": 34
+        },
+        {
+          "id": "view-top",
+          "x": 228.296875,
+          "y": 590,
+          "w": 37.640625,
+          "h": 24
+        },
+        {
+          "id": "view-reset",
+          "x": 282.9375,
+          "y": 590,
+          "w": 52.0625,
+          "h": 24
+        }
+      ]
+    },
+    {
+      "test": "Mobile tap extinguishes all (360, 640)",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Mobile controls within viewport (844, 390)",
+      "pass": true,
+      "detail": [
+        {
+          "id": "blow",
+          "x": 412.03125,
+          "y": 267,
+          "w": 290,
+          "h": 46
+        },
+        {
+          "id": "settings-button",
+          "x": 778,
+          "y": 20,
+          "w": 40,
+          "h": 40
+        },
+        {
+          "id": "sound",
+          "x": 731,
+          "y": 20,
+          "w": 40,
+          "h": 40
+        },
+        {
+          "id": "view-top",
+          "x": 681.0625,
+          "y": 342,
+          "w": 45.734375,
+          "h": 26
+        },
+        {
+          "id": "view-reset",
+          "x": 751.796875,
+          "y": 342,
+          "w": 62.203125,
+          "h": 26
+        }
+      ]
+    },
+    {
+      "test": "Mobile tap extinguishes all (844, 390)",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "Unmodified animation loop completes on real clock",
+      "pass": true,
+      "detail": {
+        "observed_seconds_in_software_renderer_including_click": 3.27,
+        "sim_elapsed": 2.4130999999996274,
+        "litCount": 0,
+        "errors": []
+      }
+    },
+    {
+      "test": "No-WebGL fallback readable with retry",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "No uncaught JS errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "note": "Frame time follows the real elapsed interval; background tabs pause and reset their frame clock on return. Final real-clock and replay regression were rerun after this improvement."
+}

@@ -1,0 +1,6 @@
+'use strict';
+const{test}=require('node:test');const assert=require('node:assert/strict');
+global.window={Wishes:require('../src/core.js')};require('../src/math.js');require('../src/geometry.js');const{M,G}=window.Wishes;
+test('行列は16成分の有限数',()=>{for(const m of [M.identity(),M.compose([1,2,3],[.1,2,4],[1,2,3]),M.ortho(-6,6,-6,6,.1,30),M.perspective(.7,1.5),M.lookAt([3,6,12],[0,1,0])]){assert.equal(m.length,16);assert.ok([...m].every(Number.isFinite));}});
+test('平行移動・拡縮と単位行列の積が正しい',()=>{const m=M.compose([1,2,3],[2,3,4]);assert.deepEqual(M.transform(m,[1,1,1]),[3,5,7]);assert.deepEqual([...M.multiply(m,M.identity())],[...m]);});
+for(const [name,build]of Object.entries({sphere:()=>G.sphere(),cylinder:()=>G.cylinder(),disc:()=>G.disc(),torus:()=>G.torus(),rosette:()=>G.rosette(),strawberry:()=>G.strawberry(),leaf:()=>G.leaf(),ribbon:()=>G.ribbon(),plane:()=>G.plane()}))test(`${name}: 頂点・法線・UV・インデックスが有効`,()=>{const g=build();for(const a of [g.pos,g.normal,g.uv])assert.ok([...a].every(Number.isFinite));assert.equal(g.pos.length,g.normal.length);assert.equal(g.pos.length/3,g.uv.length/2);for(const i of g.indices)assert.ok(i>=0&&i<g.pos.length/3);for(let i=0;i<g.normal.length;i+=3)assert.ok(Math.hypot(...g.normal.slice(i,i+3))>.9);});

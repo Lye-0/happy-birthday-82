@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17100e">
+  <meta name="description" content="82本のろうそくに、ひとつの願いを。フルーツケーキを囲んで祝う、小さな3Dの誕生日。">
+  <title>82 WISHES — 82の灯り、ひとつの願い。</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2317100e'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia' font-size='38' fill='%23f4e4c6'%3E82%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-state="lit">
+  <canvas id="scene" aria-label="82本のろうそくが灯るフルーツケーキ。ドラッグで回転、ピンチまたはホイールで拡大できます。" tabindex="0"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="frame" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">✳</span><div>82 WISHES<span class="brand-sub">A BIRTHDAY IN LIGHT</span></div></div>
+    <div class="header-actions">
+      <button id="sound" class="icon-button" type="button" aria-label="音をオンにする" aria-pressed="false" title="音をオンにする">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4 6 8H3v8h3l5 4z"/><path class="sound-wave" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="sound-muted" d="m16 9 5 6m0-6-5 6"/></svg>
+      </button>
+      <button id="settings-button" class="icon-button" type="button" aria-label="設定と操作方法" title="設定と操作方法">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2.5"/><circle cx="15" cy="17" r="2.5"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="story">
+    <p class="eyebrow"><span></span><span id="eyebrow-text">MAKE A LITTLE WISH</span></p>
+    <h1><span class="age">82<span class="age-dot">.</span></span><span class="age-caption">YEARS OF BEAUTIFUL MOMENTS</span></h1>
+    <div class="greeting" id="greeting"><h2>82年分の、<br>ありがとう。</h2><p>ひとつの願いを、82の灯りに。</p></div>
+    <div class="story-rule" aria-hidden="true"></div>
+    <p class="story-note" id="story-note">目を閉じて、願いごとを。<br>準備ができたら、ふうっとひと息。</p>
+  </main>
+
+  <aside class="candle-status" aria-label="ろうそくの点灯状況">
+    <div class="status-top"><span id="status-dot" class="status-dot"></span><span id="status-text">CANDLES ALIGHT</span></div>
+    <div class="counter"><span id="lit-count">82</span><span class="counter-divider">/</span><span class="counter-total">82</span></div>
+    <button id="count-view" type="button" class="text-button" aria-expanded="false" aria-controls="candle-audit">82本の配置を見る <span aria-hidden="true">↗</span></button>
+    <div id="candle-audit" class="candle-audit" hidden>
+      <p class="audit-title">4つの輪に、ちょうど82本。</p>
+      <div id="candle-dots" aria-hidden="true"></div>
+      <p class="audit-total">30 + 24 + 18 + 10 = <strong>82</strong></p>
+    </div>
+  </aside>
+
+  <section class="ritual" aria-label="誕生日の操作">
+    <div class="ritual-hint" id="ritual-hint"><span class="tiny-star" aria-hidden="true">✧</span> ONE BREATH. EIGHTY-TWO LIGHTS.</div>
+    <button id="blow" class="blow-button" type="button" disabled>
+      <span class="button-shine" aria-hidden="true"></span>
+      <svg class="wind-icon" viewBox="0 0 30 26" aria-hidden="true"><path d="M3 8h16c5 0 5-6 1-6-2 0-3 1-3 2M1 13h24c5 0 5 6 1 6-2 0-3-1-3-2M5 18h10c4 0 4 6 0 6-2 0-3-1-3-2"/></svg>
+      <span id="blow-label">願いを込めて、吹き消す</span>
+      <span id="button-arrow" class="button-arrow" aria-hidden="true">↗</span>
+    </button>
+    <p id="ritual-note">クリック、またはスペースキーでひと息。</p>
+  </section>
+
+  <footer class="footer">
+    <div class="explore-hint"><svg viewBox="0 0 20 24" aria-hidden="true"><rect x="4" y="2" width="12" height="19" rx="6"/><path d="M10 6v4"/></svg><span>DRAG TO EXPLORE<span class="desktop-hint"> &nbsp; · &nbsp; SCROLL TO GET CLOSER</span></span></div>
+    <div class="view-controls" aria-label="カメラの操作">
+      <button id="view-top" type="button" aria-pressed="false" title="真上から眺める"><svg viewBox="0 0 20 20" aria-hidden="true"><ellipse cx="10" cy="10" rx="7" ry="7"/><circle cx="10" cy="10" r="2"/><path d="M10 1v3m9 6h-3M10 19v-3M1 10h3"/></svg><span>上から</span></button>
+      <span class="control-divider"></span>
+      <button id="view-reset" type="button" title="最初の視点に戻す"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 6a7 7 0 1 1-1 7M4 2v5h5"/></svg><span>視点を戻す</span></button>
+    </div>
+  </footer>
+  <p id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+
+  <div id="loading" class="loading" role="status"><div class="loader-flame" aria-hidden="true"></div><p>82の灯りを、ひとつずつ。</p><span>PREPARING YOUR LITTLE CELEBRATION</span></div>
+  <div id="error" class="error-screen" hidden><p class="eyebrow">82 WISHES</p><h2>灯りをともす準備が<br>できませんでした。</h2><p id="error-message"></p><p>ファイルの内容表示ではなく、SafariやChromeなどの通常のブラウザで開いてください。</p><button id="retry" type="button">画質を下げて、もう一度</button></div>
+  <noscript><div class="error-screen"><h2>JavaScriptを有効にしてください。</h2><p>3Dのケーキを表示するために必要です。</p></div></noscript>
+
+  <dialog id="settings">
+    <div class="dialog-header"><div><span class="eyebrow">YOUR LITTLE CELEBRATION</span><h2>設定と操作方法</h2></div><button id="settings-close" class="icon-button" type="button" aria-label="閉じる">×</button></div>
+    <div class="setting-row"><label for="quality">描画品質</label><select id="quality"><option value="low">軽量</option><option value="standard" selected>標準</option><option value="high">高品質</option></select></div>
+    <div class="setting-row"><label for="auto-rotate">ゆっくり回転</label><input id="auto-rotate" type="checkbox"></div>
+    <div class="setting-row"><label for="pause">アニメーションを一時停止</label><input id="pause" type="checkbox"></div>
+    <div class="setting-row"><label for="volume">音量</label><input id="volume" type="range" min="0" max="100" value="45"></div>
+    <div class="instructions"><p><strong>眺める</strong><span>ドラッグで回転。ホイール・ピンチで拡大。<br>左・中・右ボタンのドラッグに対応。</span></p><p><strong>お祝いする</strong><span>ボタン、または <kbd>Space</kbd> で吹き消す。<br><kbd>R</kbd> でもう一度点火。<kbd>V</kbd> で上から見る。</span></p><p><strong>82本の灯り</strong><span>30・24・18・10本の4つの輪。<br>数字の飾りではなく、82本のろうそくです。</span></p></div>
+    <p class="privacy-note">音は初期オフ。マイク・カメラは使用しません。<br>外部通信・アカウント登録は不要です。</p>
+  </dialog>
+  <script src="src/core.js"></script>
+  <script src="src/math.js"></script>
+  <script src="src/geometry.js"></script>
+  <script src="src/renderer.js"></script>
+  <script src="src/cake.js"></script>
+  <script src="src/audio.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
