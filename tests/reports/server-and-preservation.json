@@ -1,0 +1,72 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "bytes": 7342,
+    "pass": true
+  },
+  {
+    "path": "/css/style.css",
+    "status": 200,
+    "contentType": "text/css; charset=utf-8",
+    "bytes": 14131,
+    "pass": true
+  },
+  {
+    "path": "/src/app.js",
+    "status": 200,
+    "contentType": "text/javascript; charset=utf-8",
+    "bytes": 13026,
+    "pass": true
+  },
+  {
+    "path": "/src/confetti.js",
+    "status": 200,
+    "contentType": "text/javascript; charset=utf-8",
+    "bytes": 2348,
+    "pass": true
+  },
+  {
+    "path": "/src/core.js",
+    "status": 200,
+    "contentType": "text/javascript; charset=utf-8",
+    "bytes": 3579,
+    "pass": true
+  },
+  {
+    "path": "missing-file.txt",
+    "status": 404,
+    "pass": true
+  },
+  {
+    "path": "src/core.js",
+    "check": "unchanged from v1.0.0",
+    "pass": true
+  },
+  {
+    "path": "src/cake.js",
+    "check": "unchanged from v1.0.0",
+    "pass": true
+  },
+  {
+    "path": "src/renderer.js",
+    "check": "unchanged from v1.0.0",
+    "pass": true
+  },
+  {
+    "path": "src/math.js",
+    "check": "unchanged from v1.0.0",
+    "pass": true
+  },
+  {
+    "path": "src/geometry.js",
+    "check": "unchanged from v1.0.0",
+    "pass": true
+  },
+  {
+    "path": "src/audio.js",
+    "check": "unchanged from v1.0.0",
+    "pass": true
+  }
+]

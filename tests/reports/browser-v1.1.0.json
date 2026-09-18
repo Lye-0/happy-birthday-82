@@ -1,0 +1,373 @@
+{
+  "mode": "built inline preview via set_content; capture=true for deterministic steps",
+  "checks": [
+    {
+      "name": "82本のモデル・芯・炎・IDを維持",
+      "pass": true
+    },
+    {
+      "name": "紙吹雪プール690枚、初期状態は非表示",
+      "pass": true
+    },
+    {
+      "name": "内訳パネル・開くボタンがDOMに存在しない",
+      "pass": true
+    },
+    {
+      "name": "初期品質は標準、音はオフ",
+      "pass": true
+    },
+    {
+      "name": "消火途中は点灯と消火済みが混在",
+      "pass": true,
+      "details": 53
+    },
+    {
+      "name": "全消火前は紙吹雪なし",
+      "pass": true
+    },
+    {
+      "name": "消火中の二重操作を抑止",
+      "pass": true
+    },
+    {
+      "name": "全消火で初動の紙吹雪が大量に舞う",
+      "pass": true,
+      "details": 366
+    },
+    {
+      "name": "時間差の紙吹雪が追加される",
+      "pass": true,
+      "details": 672
+    },
+    {
+      "name": "一時停止で演出時刻と紙吹雪を固定",
+      "pass": true
+    },
+    {
+      "name": "low画質の描画でWebGLエラーなし",
+      "pass": true
+    },
+    {
+      "name": "high画質の描画でWebGLエラーなし",
+      "pass": true
+    },
+    {
+      "name": "standard画質の描画でWebGLエラーなし",
+      "pass": true
+    },
+    {
+      "name": "上からの視点ボタンは残り、動作する",
+      "pass": true
+    },
+    {
+      "name": "パネル削除後も視点リセットで例外なし",
+      "pass": true
+    },
+    {
+      "name": "長めの紙吹雪が残る",
+      "pass": true,
+      "details": 380
+    },
+    {
+      "name": "終了後は紙吹雪を描画しない",
+      "pass": true
+    },
+    {
+      "name": "再点火で82本、紙吹雪はリセット",
+      "pass": true
+    },
+    {
+      "name": "紙吹雪の途中で再点火しても即座に消える",
+      "pass": true
+    },
+    {
+      "name": "10回反復してもろうそく・紙吹雪が増殖しない",
+      "pass": true
+    },
+    {
+      "name": "Spaceでも全消火して紙吹雪が出る",
+      "pass": true
+    },
+    {
+      "name": "Rキーで82本を再点火",
+      "pass": true
+    },
+    {
+      "name": "最終WebGLエラーなし",
+      "pass": true
+    },
+    {
+      "name": "390×844で操作ボタンが画面内に収まる",
+      "pass": true,
+      "details": {
+        "left": 29,
+        "right": 361,
+        "top": 673,
+        "bottom": 732,
+        "w": 390,
+        "h": 844,
+        "overflow": false
+      }
+    },
+    {
+      "name": "390×844でも内訳パネルなし",
+      "pass": true
+    },
+    {
+      "name": "390×844でタップ消火と紙吹雪を確認",
+      "pass": true
+    },
+    {
+      "name": "360×640で操作ボタンが画面内に収まる",
+      "pass": true,
+      "details": {
+        "left": 25,
+        "right": 335,
+        "top": 494,
+        "bottom": 545,
+        "w": 360,
+        "h": 640,
+        "overflow": false
+      }
+    },
+    {
+      "name": "360×640でも内訳パネルなし",
+      "pass": true
+    },
+    {
+      "name": "360×640でタップ消火と紙吹雪を確認",
+      "pass": true
+    },
+    {
+      "name": "844×390で操作ボタンが画面内に収まる",
+      "pass": true,
+      "details": {
+        "left": 412.03125,
+        "right": 702.03125,
+        "top": 267,
+        "bottom": 313,
+        "w": 844,
+        "h": 390,
+        "overflow": false
+      }
+    },
+    {
+      "name": "844×390でも内訳パネルなし",
+      "pass": true
+    },
+    {
+      "name": "844×390でタップ消火と紙吹雪を確認",
+      "pass": true
+    },
+    {
+      "name": "動きを減らす設定で紙吹雪を抑制",
+      "pass": true
+    },
+    {
+      "name": "通常の実時間アニメーションでも全消火と紙吹雪",
+      "pass": true
+    },
+    {
+      "name": "通常モードでも再点火で紙吹雪を停止",
+      "pass": true
+    },
+    {
+      "name": "正常系の未捕捉例外・console.errorなし",
+      "pass": true
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "snapshots": {
+    "initial": {
+      "candles": 82,
+      "wicks": 82,
+      "flames": 82,
+      "rings": [
+        30,
+        24,
+        18,
+        10
+      ],
+      "strawberries": 12,
+      "blueberries": 36,
+      "renderedCandleInstances": 82,
+      "renderedWickInstances": 82,
+      "flameOrigins": 82,
+      "uniqueCandleIds": 82,
+      "litCount": 82,
+      "state": "lit",
+      "quality": "standard",
+      "paused": false,
+      "sound": false,
+      "confettiInstances": 690,
+      "activeConfetti": 0,
+      "confettiVisible": false,
+      "confettiDuration": 13.5,
+      "reducedMotion": false,
+      "hdr": true,
+      "triangles": 1504834,
+      "drawCalls": 55,
+      "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+    },
+    "firstWave": {
+      "candles": 82,
+      "wicks": 82,
+      "flames": 82,
+      "rings": [
+        30,
+        24,
+        18,
+        10
+      ],
+      "strawberries": 12,
+      "blueberries": 36,
+      "renderedCandleInstances": 82,
+      "renderedWickInstances": 82,
+      "flameOrigins": 82,
+      "uniqueCandleIds": 82,
+      "litCount": 0,
+      "state": "celebrating",
+      "quality": "standard",
+      "paused": false,
+      "sound": false,
+      "confettiInstances": 690,
+      "activeConfetti": 366,
+      "confettiVisible": true,
+      "confettiDuration": 13.5,
+      "reducedMotion": false,
+      "hdr": true,
+      "triangles": 753798,
+      "drawCalls": 29,
+      "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+    },
+    "denseShower": {
+      "candles": 82,
+      "wicks": 82,
+      "flames": 82,
+      "rings": [
+        30,
+        24,
+        18,
+        10
+      ],
+      "strawberries": 12,
+      "blueberries": 36,
+      "renderedCandleInstances": 82,
+      "renderedWickInstances": 82,
+      "flameOrigins": 82,
+      "uniqueCandleIds": 82,
+      "litCount": 0,
+      "state": "celebrating",
+      "quality": "standard",
+      "paused": false,
+      "sound": false,
+      "confettiInstances": 690,
+      "activeConfetti": 672,
+      "confettiVisible": true,
+      "confettiDuration": 13.5,
+      "reducedMotion": false,
+      "hdr": true,
+      "triangles": 753798,
+      "drawCalls": 29,
+      "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+    },
+    "lateShower": {
+      "candles": 82,
+      "wicks": 82,
+      "flames": 82,
+      "rings": [
+        30,
+        24,
+        18,
+        10
+      ],
+      "strawberries": 12,
+      "blueberries": 36,
+      "renderedCandleInstances": 82,
+      "renderedWickInstances": 82,
+      "flameOrigins": 82,
+      "uniqueCandleIds": 82,
+      "litCount": 0,
+      "state": "celebrating",
+      "quality": "standard",
+      "paused": false,
+      "sound": false,
+      "confettiInstances": 690,
+      "activeConfetti": 380,
+      "confettiVisible": true,
+      "confettiDuration": 13.5,
+      "reducedMotion": false,
+      "hdr": true,
+      "triangles": 753798,
+      "drawCalls": 29,
+      "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+    },
+    "mobile": {
+      "candles": 82,
+      "wicks": 82,
+      "flames": 82,
+      "rings": [
+        30,
+        24,
+        18,
+        10
+      ],
+      "strawberries": 12,
+      "blueberries": 36,
+      "renderedCandleInstances": 82,
+      "renderedWickInstances": 82,
+      "flameOrigins": 82,
+      "uniqueCandleIds": 82,
+      "litCount": 0,
+      "state": "celebrating",
+      "quality": "standard",
+      "paused": false,
+      "sound": false,
+      "confettiInstances": 690,
+      "activeConfetti": 448,
+      "confettiVisible": true,
+      "confettiDuration": 13.5,
+      "reducedMotion": false,
+      "hdr": true,
+      "triangles": 753798,
+      "drawCalls": 29,
+      "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+    },
+    "realtime": {
+      "candles": 82,
+      "wicks": 82,
+      "flames": 82,
+      "rings": [
+        30,
+        24,
+        18,
+        10
+      ],
+      "strawberries": 12,
+      "blueberries": 36,
+      "renderedCandleInstances": 82,
+      "renderedWickInstances": 82,
+      "flameOrigins": 82,
+      "uniqueCandleIds": 82,
+      "litCount": 0,
+      "state": "celebrating",
+      "quality": "standard",
+      "paused": false,
+      "sound": false,
+      "confettiInstances": 690,
+      "activeConfetti": 406,
+      "confettiVisible": true,
+      "confettiDuration": 13.5,
+      "reducedMotion": false,
+      "hdr": true,
+      "triangles": 753798,
+      "drawCalls": 29,
+      "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+    }
+  },
+  "chromium": "144.0.7559.96",
+  "passed": 36,
+  "failed": 0
+}

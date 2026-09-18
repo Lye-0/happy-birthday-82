@@ -8,7 +8,7 @@ let raf=0,visible=!document.hidden,dragging=false;const reduceMotion=matchMedia(
 let width=innerWidth,height=innerHeight;
 const camera={theta:.27,elevation:.54,radius:13.0,targetTheta:.27,targetElevation:.54,targetRadius:13.0,position:[0,0,13],right:[1,0,0],vp:M.identity()};
 const pointerMap=new Map();let pinchDistance=0;
-let confetti=null,confettiSeeds=[];
+let confetti=null,confettiSeeds=[],activeConfettiCount=0;
 function isNarrow(){return width<=800&&height>500;}
 function defaultRadius(){const aspect=width/height;return isNarrow()?Math.max(14.5,7.65/(2*Math.tan(39*Math.PI/360)*aspect)):14.5;}
 function updateCamera(dt){
@@ -26,10 +26,9 @@ function updateCamera(dt){
 }
 function resize(){width=innerWidth;height=innerHeight;const old=camera.targetRadius;const base=defaultRadius();if(!dragging){camera.targetRadius=base;camera.radius=base;}if(renderer)renderer.resize(width,height,quality);updateCamera(.2);if(ready)render();}
 function setView(overhead){topView=overhead;camera.targetElevation=overhead?1.49:.54;camera.targetTheta=.27;camera.targetRadius=defaultRadius()*(overhead?(isNarrow()?1.04:1.23):1);$('view-top').setAttribute('aria-pressed',String(overhead));}
-function resetCamera(){setView(false);autoRotate=false;$('auto-rotate').checked=false;$('candle-audit').hidden=true;$('count-view').setAttribute('aria-expanded','false');document.body.classList.remove('show-audit');}
-function updateDots(){const nodes=$('candle-dots').querySelectorAll('.candle-dot');nodes.forEach((node,i)=>node.classList.toggle('out',!celebration.candle(i).lit));}
+function resetCamera(){setView(false);autoRotate=false;$('auto-rotate').checked=false;}
 function syncUI(){
- if(lastCount!==celebration.litCount){lastCount=celebration.litCount;$('lit-count').textContent=String(lastCount);updateDots();}
+ if(lastCount!==celebration.litCount){lastCount=celebration.litCount;$('lit-count').textContent=String(lastCount);}
  if(lastState===celebration.state)return;lastState=celebration.state;document.body.dataset.state=lastState;
  if(lastState==='lit'){
   $('status-text').textContent='CANDLES ALIGHT';$('eyebrow-text').textContent='MAKE A LITTLE WISH';$('greeting').innerHTML='<h2>82年分の、<br>ありがとう。</h2><p>ひとつの願いを、82の灯りに。</p>';$('story-note').innerHTML='目を閉じて、願いごとを。<br>準備ができたら、ふうっとひと息。';$('ritual-hint').innerHTML='<span class="tiny-star" aria-hidden="true">✧</span> ONE BREATH. EIGHTY-TWO LIGHTS.';$('blow-label').textContent='願いを込めて、吹き消す';$('ritual-note').textContent=isNarrow()?'ボタンをタップして、ふうっとひと息。':'クリック、またはスペースキーでひと息。';$('blow').disabled=!ready;$('button-arrow').textContent='↗';
@@ -39,12 +38,29 @@ function syncUI(){
   $('status-text').textContent='A WISH TAKES FLIGHT';$('eyebrow-text').textContent='HERE’S TO YOUR BEAUTIFUL LIFE';$('greeting').innerHTML='<h2>お誕生日、<br>おめでとう。</h2><p>これからの日々も、<br>あたたかな光で満ちますように。</p>';$('story-note').innerHTML='82歳のお誕生日、おめでとうございます。<br>何度でも、心を込めて。';$('ritual-hint').innerHTML='<span class="tiny-star" aria-hidden="true">✧</span> HAPPY 82ND BIRTHDAY.';$('blow-label').textContent='もう一度、灯す';$('button-arrow').textContent='↻';$('ritual-note').textContent='またひとつ、願いごとを。';$('blow').disabled=false;$('announcement').textContent='82本すべての炎が消えました。82歳のお誕生日、おめでとうございます。';if(!announced){announced=true;audio.celebrate();}
  }
 }
-function makeConfetti(){const rng=W.random(8298),colors=['#e6c78b','#ecded0','#ac705e','#d3b981','#a9a287'].map(M.color);confetti=new Batch(G.plane(),{base:[1,1,1],rough:.37,metal:.28},{castShadow:false,dynamic:true,name:'celebration confetti'});for(let i=0;i<115;i++){const side=i%2?1:-1;const s=.025+rng()*.027;confettiSeeds.push({x:side*(1.9+rng()*3.6),y:5.0+rng()*3.4,z:-2.6+rng()*4.6,vx:-side*(.07+rng()*.25),vy:.37+rng()*.54,phase:rng()*W.TAU,s,fall:rng()*.25});confetti.add([0,-5,0],[s,.8*s,s*.65],[0,0,0],[...colors[i%colors.length],0]);}confetti.visible=false;model.batches.push(confetti);}
+function makeConfetti(){
+ const colors=['#e6c78b','#ecded0','#ac705e','#d3b981','#a9a287'].map(M.color);
+ confetti=new Batch(G.plane(),{base:[1,1,1],rough:.37,metal:.28},{castShadow:false,dynamic:true,name:'celebration confetti'});
+ confettiSeeds=W.makeConfettiParticles();
+ for(let i=0;i<confettiSeeds.length;i++){
+  // Reserve the whole pool once; replay never allocates more paper instances.
+  confetti.add([0,-5,0],[.00001,.00001,.00001],[0,0,0],[...colors[i%colors.length],0]);
+ }
+ confetti.visible=false;model.batches.push(confetti);
+}
 function updateModel(){
  for(let i=0;i<candles.length;i++){const s=celebration.candle(i);model.wicks.setColor(i,[1,1,1,s.ember*.72]);}
- const age=celebration.elapsed-celebration.finishedAt-.32;
- confetti.visible=!reduceMotion&&age>=0&&age<8;
- if(confetti.visible){confettiSeeds.forEach((p,i)=>{const t=age;const x=p.x+p.vx*t+Math.sin(t*1.9+p.phase)*.15,y=p.y-p.vy*t-.115*t*t,z=p.z+Math.sin(t*1.2+p.phase)*.20;const fadeScale=y<-.3?0:p.s;confetti.setMatrix(i,M.compose([x,y,z],[fadeScale,fadeScale,fadeScale*.62],[p.phase+t*2.2,t*.9,Math.sin(t*1.7+p.phase)*.8]));});}
+ const age=celebration.elapsed-celebration.finishedAt-W.CONFETTI.startDelay;
+ activeConfettiCount=0;
+ confetti.visible=!reduceMotion&&celebration.state==='celebrating'&&age>=0&&age<W.CONFETTI.duration;
+ if(confetti.visible){
+  confettiSeeds.forEach((p,i)=>{
+   const sample=W.sampleConfetti(p,age);
+   if(sample.visible)activeConfettiCount++;
+   confetti.setMatrix(i,M.compose(sample.position,sample.scale,sample.rotation));
+  });
+  confetti.visible=activeConfettiCount>0;
+ }
 }
 function advance(dt){
  if(!paused){time+=dt;celebration.update(dt);if(autoRotate&&!dragging)camera.targetTheta-=dt*.065;}
@@ -64,7 +80,6 @@ function showError(error){console.error(error);$('loading').classList.add('ready
 function bindEvents(){
  const scene=$('scene');scene.addEventListener('pointerdown',onPointerDown);scene.addEventListener('pointermove',onPointerMove);scene.addEventListener('pointerup',onPointerEnd);scene.addEventListener('pointercancel',onPointerEnd);scene.addEventListener('lostpointercapture',onPointerEnd);scene.addEventListener('contextmenu',e=>e.preventDefault());scene.addEventListener('wheel',e=>{e.preventDefault();camera.targetRadius=W.clamp(camera.targetRadius*Math.exp(e.deltaY*.001),6.8,defaultRadius()*1.5);if(capture){updateCamera(1);render();}},{passive:false});
  $('blow').addEventListener('click',blow);$('view-top').addEventListener('click',()=>setView(!topView));$('view-reset').addEventListener('click',resetCamera);
- $('count-view').addEventListener('click',()=>{const show=$('candle-audit').hidden;$('candle-audit').hidden=!show;$('count-view').setAttribute('aria-expanded',String(show));document.body.classList.toggle('show-audit',show);if(show)setView(true);});
  $('sound').addEventListener('click',async()=>{const on=await audio.enable(!audio.enabled);$('sound').setAttribute('aria-pressed',String(on));$('sound').setAttribute('aria-label',on?'音をオフにする':'音をオンにする');$('sound').title=on?'音をオフにする':'音をオンにする';if(!on&&!(window.AudioContext||window.webkitAudioContext))$('announcement').textContent='このブラウザでは音声機能を利用できません。';});
  $('settings-button').addEventListener('click',()=>{$('settings').showModal();});$('settings-close').addEventListener('click',()=>$('settings').close());$('settings').addEventListener('click',e=>{if(e.target===$('settings')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
  $('quality').value=quality;$('quality').addEventListener('change',e=>{quality=e.target.value;renderer.shadowSize=quality==='high'?2048:quality==='low'?1024:1536;renderer.setupShadow();resize();});$('auto-rotate').addEventListener('change',e=>{autoRotate=e.target.checked;});$('pause').addEventListener('change',e=>setPaused(e.target.checked));$('volume').addEventListener('input',e=>{audio.volume=Number(e.target.value)/100;});
@@ -76,12 +91,11 @@ function bindEvents(){
 function init(){try{
  if(!['low','standard','high'].includes(quality))quality='standard';
  candles=W.makeCandles();celebration=new W.Celebration(candles);audio=new W.Audio();
- const dots=$('candle-dots');let id=0;W.RINGS.forEach(r=>{const row=document.createElement('div');row.className='dot-row';const label=document.createElement('b');label.textContent=r.count;row.appendChild(label);for(let i=0;i<r.count;i++){const dot=document.createElement('span');dot.className='candle-dot';dot.dataset.candle=String(++id);row.appendChild(dot);}dots.appendChild(row);});
  renderer=new W.Renderer($('scene'));model=W.buildCake(candles);makeConfetti();renderer.setupEffects(candles);bindEvents();resize();camera.radius=camera.targetRadius=defaultRadius();updateCamera(1);ready=true;document.body.dataset.ready='true';syncUI();render();$('loading').classList.add('ready');startFrames();
  // Explicit inspection interface: used by the included browser checks and preview capture.
  window.__WISHES__={
   get ready(){return ready;},get state(){return celebration.state;},get litCount(){return celebration.litCount;},get elapsed(){return celebration.elapsed;},get camera(){return{theta:camera.theta,elevation:camera.elevation,radius:camera.radius,position:[...camera.position]};},
-  inspect(){return{...model.counts,renderedCandleInstances:model.wax.matrices.length,renderedWickInstances:model.wicks.matrices.length,flameOrigins:renderer.effectCandles.length,uniqueCandleIds:new Set(candles.map(c=>c.id)).size,litCount:celebration.litCount,state:celebration.state,quality,paused,sound:audio.enabled,hdr:renderer.hdr,triangles:renderer.triangleCount,drawCalls:renderer.batchCount,webgl:renderer.gl.getParameter(renderer.gl.VERSION)};},
+  inspect(){return{...model.counts,renderedCandleInstances:model.wax.matrices.length,renderedWickInstances:model.wicks.matrices.length,flameOrigins:renderer.effectCandles.length,uniqueCandleIds:new Set(candles.map(c=>c.id)).size,litCount:celebration.litCount,state:celebration.state,quality,paused,sound:audio.enabled,confettiInstances:confettiSeeds.length,activeConfetti:activeConfettiCount,confettiVisible:confetti.visible,confettiDuration:W.CONFETTI.duration,reducedMotion:reduceMotion,hdr:renderer.hdr,triangles:renderer.triangleCount,drawCalls:renderer.batchCount,webgl:renderer.gl.getParameter(renderer.gl.VERSION)};},
   blow,reset,setView,advance(seconds){let remaining=Math.max(0,Math.min(60,seconds));while(remaining>.00001){const dt=Math.min(remaining,1/60);advance(dt);remaining-=dt;}render();return this.inspect();},render,
   candlePositions(){return candles.map(c=>({...c}));}
  };
